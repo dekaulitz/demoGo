@@ -5,7 +5,7 @@
     "statusCode": 4100,
     "message": "Terdapat kesalahan pada transaksi"
   },
-  "USER_NOT_FOUND": {
+  "USER_NOT_FOUND_ERROR": {
     "internalMessage": "Request for %s but data not found",
     "httpCode": 404,
     "statusCode": 4101,
