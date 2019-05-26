@@ -1,7 +1,6 @@
 package configuration
 
 import (
-	"github.com/asaskevich/govalidator"
 	"github.com/joho/godotenv"
 	"log"
 	"os"
@@ -28,7 +27,7 @@ func init() {
 	log.Printf("load configuration from .env.%s", goEnvironment)
 	err := godotenv.Load(os.ExpandEnv(path.Join(os.Getenv("CONF_PATH"), ".env."+goEnvironment)))
 	if err != nil {
-		log.Panic("Error loading .env file", err)
+		log.Panic("ErrorMapper loading .env file", err)
 	}
 
 	ConfigurationData.Database = MySQL{os.Getenv("HOSTNAME"), os.Getenv("USERNAME"),
@@ -43,7 +42,8 @@ func init() {
 	//	MaxAge:     28,   // days
 	//	Compress:   true, // disabled by default
 	//})
-	govalidator.SetFieldsRequiredByDefault(true)
+	//govalidator.SetFieldsRequiredByDefault(true)
+	LoadError()
 }
 
 //GetConfiguration Get the new configuration
