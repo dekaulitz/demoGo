@@ -23,6 +23,11 @@ use Glide to install this repo dependencies:
 ```bash
 glide install
 ```
+and then build the project
+
+```bash
+go build
+```
 
 Finally, we can start the server by running:
 ```bash
