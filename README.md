@@ -16,7 +16,8 @@ cd $GOPATH/src && git clone https://github.com/dekaulitz/demoGo
 ```
 
 
-and then, **edit** `.env` file to be the expected configuration.
+and then, **edit** `.env` file to be the expected configuration to `.env.local`. 
+if you using the different path you can edit the configuration path on file config.go
 
 use Glide to install this repo dependencies:
 
