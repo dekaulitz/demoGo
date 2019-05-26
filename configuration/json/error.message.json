@@ -1,0 +1,14 @@
+{
+  "DATABASE_ERROR": {
+    "internalMessage": "Database error cause, %s",
+    "httpCode": 500,
+    "statusCode": 4000,
+    "message": "Terdapat kesalahan pada transaksi"
+  },
+  "VALIDATION_FAIL": {
+    "internalMessage": "Validation fail because , %s",
+    "httpCode": 422,
+    "statusCode": 4220,
+    "message": "Validation fail"
+  }
+}

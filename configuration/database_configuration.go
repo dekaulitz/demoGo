@@ -2,9 +2,9 @@ package configuration
 
 import (
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/go-xorm/xorm"
 	"strconv"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 //MySQL struct
@@ -27,7 +27,6 @@ func init() {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8&parseTime=true",
 		conf.Database.Username, conf.Database.Password, conf.Database.Hostname, conf.Database.Schema)
 	var err error
-	fmt.Println(dsn)
 	engine, err = xorm.NewEngine("mysql", dsn)
 	if err != nil {
 		err = fmt.Errorf(ErrFailedToConnectToSQL, err)

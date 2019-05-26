@@ -3,6 +3,7 @@ package libraries
 import (
 	"bytes"
 	"github.com/gin-gonic/gin"
+	"log"
 	"strings"
 	"time"
 	"unicode"
@@ -32,9 +33,6 @@ func SpaceMap(str string) string {
 	}, str)
 }
 
-//
-////write response
-//func (w BodyLogWriter) Write(b []byte) (int, error) {
-//	w.body.Write(b)
-//	return w.ResponseWriter.Write(b)
-//}
+func LogPanic(err error) {
+	log.Panic("failed to load error configuration cause, %s", err.Error())
+}

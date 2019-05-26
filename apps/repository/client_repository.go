@@ -1,8 +1,8 @@
 package repository
 
 import (
+	"demoGo/apps/exception"
 	"demoGo/configuration"
-	"fmt"
 	"time"
 )
 
@@ -31,14 +31,15 @@ const (
 	clientTableName = "client"
 )
 
-func ClientIndex() []*Client {
+func ClientIndex() ([]*Client, *exception.ErrorException) {
 	var clients []*Client
 	sess := configuration.GetConnection()
 	defer sess.Close()
 	sess.Table(clientTableName)
 	err := sess.Find(&clients)
 	if err != nil {
-		fmt.Println(err)
+		return clients, exception.NewError(configuration.ERROR_DATABASE_ERROR).ThrowError(err.Error())
 	}
-	return clients
+	return clients, nil
+
 }

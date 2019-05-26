@@ -5,7 +5,4 @@ type ErrorModel struct {
 	Message string
 }
 
-func ThrowError() ErrorModel {
-	var err ErrorModel
-	return err
-}
+const ()

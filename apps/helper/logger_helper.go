@@ -49,13 +49,14 @@ type LogRequest struct {
 	Latency      time.Duration `json:"latency"`
 	ResponseBody interface{}   `json:"response_body"`
 }
-var (
 
-)
+var ()
+
 func (w BodyLogWriter) Write(b []byte) (int, error) {
 	w.Body.Write(b)
 	return w.ResponseWriter.Write(b)
 }
+
 //remove whitespace
 func SpaceMap(str string) string {
 	return strings.Map(func(r rune) rune {
