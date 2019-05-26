@@ -10,7 +10,7 @@ const (
 )
 
 type MessageHelper interface {
-	Throw(message string) *ResponseInfo
+	Ress(message string) *ResponseInfo
 }
 
 type ResponseInfo struct {
