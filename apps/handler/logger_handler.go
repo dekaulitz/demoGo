@@ -1,4 +1,4 @@
-package helper
+package handler
 
 import (
 	"bytes"
@@ -49,8 +49,6 @@ type LogRequest struct {
 	Latency      time.Duration `json:"latency"`
 	ResponseBody interface{}   `json:"response_body"`
 }
-
-var ()
 
 func (w BodyLogWriter) Write(b []byte) (int, error) {
 	w.Body.Write(b)

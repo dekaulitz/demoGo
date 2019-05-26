@@ -1,0 +1,44 @@
+{
+  "DATABASE_ERROR": {
+    "internalMessage": "Database error %s",
+    "httpCode": 500,
+    "statusCode": 4100,
+    "message": "Terdapat kesalahan pada transaksi"
+  },
+  "USER_NOT_FOUND": {
+    "internalMessage": "Request for %s but data not found",
+    "httpCode": 404,
+    "statusCode": 4101,
+    "message": "Akun tidak ditemukan"
+  },
+  "VALIDATION_FAIL": {
+    "internalMessage": "Validation fail  ",
+    "httpCode": 422,
+    "statusCode": 4201,
+    "message": "Validation fail %s"
+  },
+  "TOKEN_NOT_FOUND": {
+    "internalMessage": "Request for access but token not found",
+    "httpCode": 401,
+    "statusCode": 42012,
+    "message": "Unauthorized access %s"
+  },
+  "JSON_UNMARSHALL_ERROR": {
+    "internalMessage": "Json unmarshall error %s  ",
+    "httpCode": 400,
+    "statusCode": 4202,
+    "message": "Bad request "
+  },
+  "INTERNAL_SERVER_ERROR": {
+    "internalMessage": "INTERNAL SERVER ERROR  ",
+    "httpCode": 500,
+    "statusCode": 5000,
+    "message": "Service unavailable for a moment"
+  },
+  "USER_CREATED_SUCCESS": {
+    "internalMessage": "USER_CREATED_SUCCESS  ",
+    "httpCode": 201,
+    "statusCode": 2100,
+    "message": "USER_CREATED_SUCCESS"
+  }
+}

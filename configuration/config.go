@@ -43,7 +43,7 @@ func init() {
 	//	Compress:   true, // disabled by default
 	//})
 	//govalidator.SetFieldsRequiredByDefault(true)
-	LoadError()
+	LoadMessage()
 }
 
 //GetConfiguration Get the new configuration

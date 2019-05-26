@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"demoGo/apps/exception"
+	"demoGo/apps/handler/exception"
 	"demoGo/configuration"
 	"time"
 )
@@ -38,8 +38,7 @@ func ClientIndex() ([]*Client, *exception.ErrorException) {
 	sess.Table(clientTableName)
 	err := sess.Find(&clients)
 	if err != nil {
-		return clients, exception.NewError(configuration.ERROR_DATABASE_ERROR).ThrowError(err.Error())
+		return clients, exception.Exception(exception.JSON_UNMARSHALL_ERROR).Throw(err.Error())
 	}
 	return clients, nil
-
 }

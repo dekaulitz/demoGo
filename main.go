@@ -4,7 +4,7 @@ import (
 	"bitbucket.com/LippoDigitalOVO/ovo-auth/lib/uuid"
 	"bytes"
 	"demoGo/apps/controllers"
-	"demoGo/apps/helper"
+	"demoGo/apps/handler"
 	"demoGo/apps/routes"
 	"demoGo/configuration"
 	"github.com/gin-contrib/cors"
@@ -27,9 +27,9 @@ func main() {
 func setupRouter() *gin.Engine {
 	router := gin.Default()
 	router.Use(func(c *gin.Context) {
-		blw := &helper.BodyLogWriter{Body: bytes.NewBufferString(""), ResponseWriter: c.Writer}
+		blw := &handler.BodyLogWriter{Body: bytes.NewBufferString(""), ResponseWriter: c.Writer}
 		c.Writer = blw
-		var logBody helper.LogRequest
+		var logBody handler.LogRequest
 		t := time.Now()
 		logBody.RequestId = uuid.GenerateUUID()
 		logBody.Url = c.Request.RequestURI
@@ -38,7 +38,7 @@ func setupRouter() *gin.Engine {
 			requestBodyBytes, _ = ioutil.ReadAll(c.Request.Body)
 		}
 		c.Request.Body = ioutil.NopCloser(bytes.NewBuffer(requestBodyBytes))
-		logBody.Body = helper.SpaceMap(string(requestBodyBytes))
+		logBody.Body = handler.SpaceMap(string(requestBodyBytes))
 		if logBody.Body == "" {
 			logBody.Body = "nil"
 		}
@@ -66,7 +66,7 @@ func setupRouter() *gin.Engine {
 	router.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"status": 404, "message": "routing not found"})
 	})
-	router.GET("/health", controllers.HealthCheck)
+	router.GET("/health", controllers.Health)
 	routes.SetRouterv1(router)
 	return router
 }
