@@ -14,7 +14,3 @@ type ResponseModel struct {
 	Meta Meta        `json:"meta"`
 	Body interface{} `json:"body"`
 }
-
-func GetMeta(meta Meta) Meta {
-	return meta
-}
