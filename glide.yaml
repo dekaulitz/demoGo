@@ -1,0 +1,19 @@
+package: .gli
+import:
+  - package: github.com/joho/godotenv
+    version: ^1.3.0
+  - package: github.com/kardianos/govendor
+    version: ^1.0.9
+  - package: github.com/gin-gonic/gin
+    version: ^1.3.0
+  - package: github.com/gin-contrib/cors
+    version: ^1.2.0
+  - package: github.com/stretchr/testify
+    version: ^1.3.0
+  - package: github.com/natefinch/lumberjack
+    version: 2.0
+  - package: github.com/go-xorm/xorm
+  - package: github.com/go-sql-driver/mysql
+  - package: github.com/asaskevich/govalidator
+    subpackages:
+      - assert
