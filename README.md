@@ -6,8 +6,8 @@ Following is technology stack that is used in this microservice
 |------|-------------|
 | [Golang](https://golang.org/) | Go is an open source programming language that makes it easy to build simple, reliable, and efficient software. |
 | [Glide](https://glide.sh/) | Package Management for Go. |
-| [Mysql Connection](http://xorm.io/) |. Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle |
-| [Mysql Driver](https://github.com/go-sql-driver/mysql) |. Mysql driver for database connection|
+| [Mysql Connection](http://xorm.io/) | Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle |
+| [Mysql Driver](https://github.com/go-sql-driver/mysql) | Mysql driver for database connection|
 
 
 ### Backend Setup
