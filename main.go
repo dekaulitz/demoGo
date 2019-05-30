@@ -27,6 +27,7 @@ func main() {
 func setupRouter() *gin.Engine {
 	router := gin.Default()
 	router.Use(func(c *gin.Context) {
+		c.Request.Header.Add("request-id", uuid.GenerateUUID())
 		blw := &handler.BodyLogWriter{Body: bytes.NewBufferString(""), ResponseWriter: c.Writer}
 		c.Writer = blw
 		var logBody handler.LogRequest

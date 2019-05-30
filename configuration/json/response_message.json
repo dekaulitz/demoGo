@@ -5,6 +5,18 @@
     "statusCode": 4100,
     "message": "Terdapat kesalahan pada transaksi"
   },
+  "RECORD_NOT_FOUND": {
+    "internalMessage": "Database error %s",
+    "httpCode": 500,
+    "statusCode": 4100,
+    "message": "Data tidak ditemukan %s"
+  },
+  "FAIL_TO_SAVE": {
+    "internalMessage": "Database error %s",
+    "httpCode": 500,
+    "statusCode": 4100,
+    "message": "Fail to save %s"
+  },
   "USER_NOT_FOUND_ERROR": {
     "internalMessage": "Request for %s but data not found",
     "httpCode": 404,
@@ -35,10 +47,22 @@
     "statusCode": 5000,
     "message": "Service unavailable for a moment"
   },
-  "USER_CREATED_SUCCESS": {
-    "internalMessage": "USER_CREATED_SUCCESS  ",
-    "httpCode": 201,
+  "RESPONSE_SUCCESS": {
+    "internalMessage": "RESPONSE_SUCCESS  ",
+    "httpCode": 200,
     "statusCode": 2100,
-    "message": "USER_CREATED_SUCCESS"
+    "message": "SUCCESS"
+  },
+  "RESPONSE_CREATED_SUCCESS": {
+    "internalMessage": "RESPONSE_CREATED_SUCCESS  ",
+    "httpCode": 201,
+    "statusCode": 2101,
+    "message": "SUCCESS"
+  },
+  "RESPONSE_SUCCESS_UPDATED": {
+    "internalMessage": "DATA_SUCCESS_UPDATED  ",
+    "httpCode": 200,
+    "statusCode": 2102,
+    "message": "SUCCESS"
   }
 }

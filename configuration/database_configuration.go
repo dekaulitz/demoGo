@@ -40,6 +40,7 @@ func init() {
 	engine.SetMaxOpenConns(maxCon)
 	engine.SetMaxIdleConns(maxIdleCon)
 	engine.SetConnMaxLifetime(-1)
+	engine.Sync()
 }
 
 func GetConnection() *xorm.Session {
@@ -48,4 +49,11 @@ func GetConnection() *xorm.Session {
 
 func GetEngine() *xorm.Engine {
 	return engine
+}
+
+func GetSession() *xorm.Session {
+	sess := GetConnection()
+	defer sess.Close()
+	return sess
+
 }

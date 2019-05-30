@@ -6,8 +6,12 @@ import (
 )
 
 func SetRouterv1(r *gin.Engine) {
-	v1 := r.Group("/api/v1")
+	users := r.Group("/api/v1/users")
 	{
-		v1.POST("/registration", controllers.Registrations)
+		users.GET("", controllers.UserIndex)
+		users.POST("/store", controllers.UserInsert)
+		users.GET("/delete/:id", controllers.UserDelete)
+		users.POST("/update/:id", controllers.UserUpdate)
+		users.GET("/show/:id", controllers.UserShow)
 	}
 }

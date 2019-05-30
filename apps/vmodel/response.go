@@ -12,5 +12,5 @@ type Meta struct {
 
 type ResponseModel struct {
 	Meta Meta        `json:"meta"`
-	Body interface{} `json:"body"`
+	Data interface{} `json:"data"`
 }

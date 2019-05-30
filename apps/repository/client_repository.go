@@ -31,6 +31,11 @@ const (
 	clientTableName = "client"
 )
 
+var (
+	sortingDefault   = []string{"UpdatedAt", "CreatedAt"}
+	searchingDefault = []string{"Name"}
+)
+
 func ClientIndex() ([]*Client, *exception.ErrorException) {
 	var clients []*Client
 	sess := configuration.GetConnection()

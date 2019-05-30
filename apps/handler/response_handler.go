@@ -11,7 +11,7 @@ import (
 //generate response ok with custom http code
 func ResponseOk(body interface{}, c *gin.Context, ressMessage *ResponseInfo) {
 	var response vmodel.ResponseModel
-	response.Body = body
+	response.Data = body
 	response.Meta.RequestId = c.Request.Header.Get("request-id")
 	response.Meta.Message = ressMessage.Info.Message
 	response.Meta.Timestamp = time.Now()
@@ -32,9 +32,9 @@ func ResponseOk(body interface{}, c *gin.Context, ressMessage *ResponseInfo) {
 //generate response error with return ErrorException model
 func ResponseError(body interface{}, c *gin.Context, message *exception.ErrorException) {
 	var response vmodel.ResponseModel
-	response.Body = body
+	response.Data = body
 	response.Meta.RequestId = c.Request.Header.Get("request-id")
-	response.Meta.Message = message.Info.Message
+	response.Meta.Message = message.Info.InternalMessage
 	response.Meta.Timestamp = time.Now()
 	response.Meta.StatusCode = message.Info.StatusCode
 	response.Meta.HttpCode = message.Info.Httpcode

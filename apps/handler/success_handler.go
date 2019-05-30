@@ -2,11 +2,12 @@ package handler
 
 import (
 	"demoGo/configuration"
-	"strings"
 )
 
 const (
-	USER_CREATED_SUCCESS = "USER_CREATED_SUCCESS"
+	RESPONSE_CREATED_SUCCESS = "RESPONSE_CREATED_SUCCESS"
+	RESPONSE_SUCCESS_UPDATED = "RESPONSE_SUCCESS_UPDATED"
+	RESPONSE_SUCCESS         = "RESPONSE_SUCCESS"
 )
 
 type MessageHelper interface {
@@ -21,16 +22,16 @@ var (
 	message string
 )
 
-func Success(errMessage string) *ResponseInfo {
-	message = errMessage
+func Success(successMessage string) *ResponseInfo {
+	message = successMessage
 	return &ResponseInfo{}
 }
 
-func (ResponseInfo) Ress(infoMessage string) *ResponseInfo {
+func (ResponseInfo) Ress() *ResponseInfo {
 	info := &ResponseInfo{}
 	success := configuration.GetMessage(message)
-	success.InternalMessage = strings.Replace(success.InternalMessage, "%s", infoMessage, -1)
-	success.Message = strings.Replace(success.Message, "%s", infoMessage, -1)
+	success.InternalMessage = success.InternalMessage
+	success.Message = success.Message
 	info.Info = success
 	return info
 }
