@@ -15,5 +15,6 @@ import:
   - package: github.com/go-xorm/xorm
   - package: github.com/go-sql-driver/mysql
   - package: github.com/asaskevich/govalidator
+  - package: github.com/SermoDigital/jose
     subpackages:
       - assert
