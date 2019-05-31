@@ -2,7 +2,9 @@ package repository
 
 import (
 	"demoGo/apps/handler/exception"
+	"demoGo/apps/models"
 	"demoGo/configuration"
+	"demoGo/libraries"
 	"time"
 )
 
@@ -12,6 +14,7 @@ type UsersInterface interface {
 	Show(id string) (*UsersEntity, *exception.ErrorException)
 	Delete(id string) *exception.ErrorException
 	Update(id string, user *UsersEntity) *exception.ErrorException
+	Paging(paging *models.Pagination) (*[]UsersEntity, *exception.ErrorException)
 }
 
 type UsersEntity struct {
@@ -25,6 +28,10 @@ type UsersEntity struct {
 
 const (
 	tableUsers = "users"
+)
+
+var (
+	paginationList = []string{"id", "name", "email", "created_at", "updated_at"}
 )
 
 func init() {
@@ -103,4 +110,34 @@ func (u User) Update(id string, user *UsersEntity) *exception.ErrorException {
 		return exception.Exception(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
 	}
 	return nil
+}
+
+func (u User) Paging(paging *models.Pagination) (*[]UsersEntity, *exception.ErrorException) {
+	var users []UsersEntity
+	sess := configuration.GetSession()
+	sess.Table(tableUsers)
+	for _, searchValue := range paging.GetSearchingBy(paging) {
+		for key, value := range searchValue {
+			if libraries.Contains(paginationList, key) {
+				sess.Where(key+" like ?", "%"+value+"%")
+			}
+		}
+	}
+	for _, sortBy := range paging.GetSorting(paging) {
+		for key, value := range sortBy {
+			if libraries.Contains(paginationList, key) {
+				if value == "desc" {
+					sess.Desc(key)
+				} else {
+					sess.Asc(key)
+				}
+			}
+		}
+	}
+	err := sess.Find(&users)
+	if err != nil {
+		return nil, exception.Exception(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
+	}
+	return &users, nil
+
 }

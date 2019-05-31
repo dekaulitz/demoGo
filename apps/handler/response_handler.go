@@ -34,7 +34,7 @@ func ResponseError(body interface{}, c *gin.Context, message *exception.ErrorExc
 	var response vmodel.ResponseModel
 	response.Data = body
 	response.Meta.RequestId = c.Request.Header.Get("request-id")
-	response.Meta.Message = message.Info.InternalMessage
+	response.Meta.Message = message.Info.Message
 	response.Meta.Timestamp = time.Now()
 	response.Meta.StatusCode = message.Info.StatusCode
 	response.Meta.HttpCode = message.Info.Httpcode
