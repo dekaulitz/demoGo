@@ -26,3 +26,12 @@ func MapTransform(obj interface{}, name string, value interface{}) error {
 	structFieldValue.Set(val)
 	return nil
 }
+
+func Contains(a []string, x string) bool {
+	for _, n := range a {
+		if x == n {
+			return true
+		}
+	}
+	return false
+}
