@@ -3,8 +3,8 @@ package controllers
 import (
 	"demoGo/apps/handler"
 	"demoGo/apps/handler/exception"
-	"demoGo/apps/models"
 	"demoGo/apps/repository"
+	"demoGo/apps/repository/paging"
 	"github.com/gin-gonic/gin"
 )
 
@@ -83,13 +83,17 @@ func UserUpdate(c *gin.Context) {
 }
 
 func UserPagination(c *gin.Context) {
-	var pagination models.Pagination
-	c.BindQuery(&pagination)
-	users, err := repository.GetUserRepository().Paging(&pagination)
+	var pagination paging.Pagination
+	errBindding := c.BindQuery(&pagination)
+	if errBindding != nil {
+		handler.ResponseError(nil, c, exception.Exception(exception.JSON_UNMARSHALL_ERROR).Throw(errBindding.Error()))
+		return
+	}
+	page, err := repository.GetUserRepository().Paging(&pagination)
 	if err != nil {
 		handler.ResponseError(nil, c, err)
 		return
 	}
-	handler.ResponseOk(users, c, handler.Success(handler.RESPONSE_SUCCESS_UPDATED).Ress())
+	handler.ResponseOk(page, c, handler.Success(handler.RESPONSE_SUCCESS_UPDATED).Ress())
 	return
 }

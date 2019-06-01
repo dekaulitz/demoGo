@@ -13,6 +13,6 @@ func SetRouterv1(r *gin.Engine) {
 		users.GET("/delete/:id", controllers.UserDelete)
 		users.POST("/update/:id", controllers.UserUpdate)
 		users.GET("/show/:id", controllers.UserShow)
-		users.GET("/pagination", controllers.UserPagination)
+		users.GET("/paging", controllers.UserPagination)
 	}
 }

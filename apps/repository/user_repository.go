@@ -2,9 +2,8 @@ package repository
 
 import (
 	"demoGo/apps/handler/exception"
-	"demoGo/apps/models"
+	"demoGo/apps/repository/paging"
 	"demoGo/configuration"
-	"demoGo/libraries"
 	"time"
 )
 
@@ -14,7 +13,7 @@ type UsersInterface interface {
 	Show(id string) (*UsersEntity, *exception.ErrorException)
 	Delete(id string) *exception.ErrorException
 	Update(id string, user *UsersEntity) *exception.ErrorException
-	Paging(paging *models.Pagination) (*[]UsersEntity, *exception.ErrorException)
+	Paging(paging *paging.Pagination) (*paging.Pagination, *exception.ErrorException)
 }
 
 type UsersEntity struct {
@@ -31,7 +30,7 @@ const (
 )
 
 var (
-	paginationList = []string{"id", "name", "email", "created_at", "updated_at"}
+	paginationRule = []string{"id", "name", "email", "created_at", "updated_at"}
 )
 
 func init() {
@@ -112,32 +111,32 @@ func (u User) Update(id string, user *UsersEntity) *exception.ErrorException {
 	return nil
 }
 
-func (u User) Paging(paging *models.Pagination) (*[]UsersEntity, *exception.ErrorException) {
-	var users []UsersEntity
+func (u User) Paging(property *paging.Pagination) (*paging.Pagination, *exception.ErrorException) {
+	users := []UsersEntity{}
+	counter := configuration.GetSession()
+	counter.Table(tableUsers)
 	sess := configuration.GetSession()
 	sess.Table(tableUsers)
-	for _, searchValue := range paging.GetSearchingBy(paging) {
-		for key, value := range searchValue {
-			if libraries.Contains(paginationList, key) {
-				sess.Where(key+" like ?", "%"+value+"%")
-			}
-		}
-	}
-	for _, sortBy := range paging.GetSorting(paging) {
-		for key, value := range sortBy {
-			if libraries.Contains(paginationList, key) {
-				if value == "desc" {
-					sess.Desc(key)
-				} else {
-					sess.Asc(key)
-				}
-			}
-		}
-	}
+
+	/*
+		splitting session with 2 session and injecting current session with pagination builder
+		remove it if you dont want to use paging feature
+	*/
+	paging.GetPage().SetQueryBuilder(property, counter, sess, paginationRule)
+
 	err := sess.Find(&users)
 	if err != nil {
 		return nil, exception.Exception(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
 	}
-	return &users, nil
+	/**
+	setup the property of paging
+	*/
+	property.Rows = users
+	property.RowCount, err = counter.Count(&UsersEntity{})
+	property.PageCount = paging.GetPage().GetRowCount(property)
 
+	if err != nil {
+		return nil, exception.Exception(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
+	}
+	return property, nil
 }
