@@ -38,15 +38,16 @@ func ResponseError(body interface{}, c *gin.Context, message *exception.ErrorExc
 	response.Meta.Timestamp = time.Now()
 	response.Meta.StatusCode = message.Info.StatusCode
 	response.Meta.HttpCode = message.Info.Httpcode
-	ress, err := json.Marshal(response)
+	ress, err := json.Marshal(message)
 	if err != nil {
 		message = exception.Exception(exception.JSON_UNMARSHALL_ERROR).Throw(err.Error())
 		ResponseError(nil, c, message)
 		return
 	}
+
 	c.Writer.WriteHeader(message.Info.Httpcode)
-	c.Writer.Header().Set("Content-Type", "application/json")
 	c.Writer.Write(ress)
+
 	return
 
 }
