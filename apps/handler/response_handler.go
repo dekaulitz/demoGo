@@ -38,7 +38,7 @@ func ResponseError(body interface{}, c *gin.Context, message *exception.ErrorExc
 	response.Meta.Timestamp = time.Now()
 	response.Meta.StatusCode = message.Info.StatusCode
 	response.Meta.HttpCode = message.Info.Httpcode
-	ress, err := json.Marshal(message)
+	ress, err := json.Marshal(response)
 	if err != nil {
 		message = exception.Exception(exception.JSON_UNMARSHALL_ERROR).Throw(err.Error())
 		ResponseError(nil, c, message)
