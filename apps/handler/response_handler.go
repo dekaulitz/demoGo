@@ -24,7 +24,6 @@ func ResponseOk(body interface{}, c *gin.Context, ressMessage *ResponseInfo) {
 		return
 	}
 	c.Writer.WriteHeader(ressMessage.Info.Httpcode)
-	c.Writer.Header().Set("Content-Type", "application/json")
 	c.Writer.Write(ress)
 	return
 }
