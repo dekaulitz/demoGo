@@ -27,7 +27,7 @@ var (
 	exceptionMessage string
 )
 
-func Exception(errMessage string) *ErrorException {
+func NewException(errMessage string) *ErrorException {
 	exceptionMessage = errMessage
 	return &ErrorException{}
 }

@@ -43,7 +43,7 @@ func ClientIndex() ([]*Client, *exception.ErrorException) {
 	sess.Table(clientTableName)
 	err := sess.Find(&clients)
 	if err != nil {
-		return clients, exception.Exception(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
+		return clients, exception.NewException(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
 	}
 	return clients, nil
 }

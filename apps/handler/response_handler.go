@@ -19,7 +19,7 @@ func ResponseOk(body interface{}, c *gin.Context, ressMessage *ResponseInfo) {
 	response.Meta.HttpCode = ressMessage.Info.Httpcode
 	ress, err := json.Marshal(response)
 	if err != nil {
-		errExp := exception.Exception(exception.JSON_UNMARSHALL_ERROR).Throw(err.Error())
+		errExp := exception.NewException(exception.JSON_UNMARSHALL_ERROR).Throw(err.Error())
 		ResponseError(nil, c, errExp)
 		return
 	}
@@ -39,7 +39,7 @@ func ResponseError(body interface{}, c *gin.Context, message *exception.ErrorExc
 	response.Meta.HttpCode = message.Info.Httpcode
 	ress, err := json.Marshal(response)
 	if err != nil {
-		message = exception.Exception(exception.JSON_UNMARSHALL_ERROR).Throw(err.Error())
+		message = exception.NewException(exception.JSON_UNMARSHALL_ERROR).Throw(err.Error())
 		ResponseError(nil, c, message)
 		return
 	}

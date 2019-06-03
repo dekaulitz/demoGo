@@ -33,7 +33,7 @@ func UserInsert(c *gin.Context) {
 	//binding json to model and return error if fail
 	jsonFail := c.BindJSON(&user)
 	if jsonFail != nil {
-		handler.ResponseError(nil, c, exception.Exception(exception.JSON_UNMARSHALL_ERROR).Throw(jsonFail.Error()))
+		handler.ResponseError(nil, c, exception.NewException(exception.JSON_UNMARSHALL_ERROR).Throw(jsonFail.Error()))
 		return
 	}
 	user, err := repository.GetUserRepository().Store(user)
@@ -70,7 +70,7 @@ func UserUpdate(c *gin.Context) {
 	//binding json to model and return error if fail
 	jsonFail := c.BindJSON(&user)
 	if jsonFail != nil {
-		handler.ResponseError(nil, c, exception.Exception(exception.JSON_UNMARSHALL_ERROR).Throw(jsonFail.Error()))
+		handler.ResponseError(nil, c, exception.NewException(exception.JSON_UNMARSHALL_ERROR).Throw(jsonFail.Error()))
 		return
 	}
 	err := repository.GetUserRepository().Update(c.Param("id"), user)
@@ -86,7 +86,7 @@ func UserPagination(c *gin.Context) {
 	var pagination paging.Pagination
 	errBindding := c.BindQuery(&pagination)
 	if errBindding != nil {
-		handler.ResponseError(nil, c, exception.Exception(exception.JSON_UNMARSHALL_ERROR).Throw(errBindding.Error()))
+		handler.ResponseError(nil, c, exception.NewException(exception.JSON_UNMARSHALL_ERROR).Throw(errBindding.Error()))
 		return
 	}
 	page, err := repository.GetUserRepository().Paging(&pagination)

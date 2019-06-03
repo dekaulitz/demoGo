@@ -53,10 +53,10 @@ func (u User) Show(id string) (*UsersEntity, *exception.ErrorException) {
 	sess.ID(id)
 	isExist, err := sess.Get(&users)
 	if err != nil {
-		return nil, exception.Exception(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
+		return nil, exception.NewException(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
 	}
 	if !isExist {
-		return nil, exception.Exception(exception.RECORD_NOT_FOUND).Throw(" doesnt exist")
+		return nil, exception.NewException(exception.RECORD_NOT_FOUND).Throw(" doesnt exist")
 	}
 	return &users, nil
 }
@@ -67,7 +67,7 @@ func (u User) Index() ([]*UsersEntity, *exception.ErrorException) {
 	sess.Table(tableUsers)
 	err := sess.Find(&users)
 	if err != nil {
-		return nil, exception.Exception(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
+		return nil, exception.NewException(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
 	}
 	return users, nil
 }
@@ -79,10 +79,10 @@ func (u User) Store(user *UsersEntity) (*UsersEntity, *exception.ErrorException)
 	sess.Table(tableUsers)
 	isSuccess, err := sess.Insert(user)
 	if err != nil {
-		return nil, exception.Exception(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
+		return nil, exception.NewException(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
 	}
 	if isSuccess == 0 {
-		return nil, exception.Exception(exception.FAIL_TO_SAVE).Throw("Data not successfully saved")
+		return nil, exception.NewException(exception.FAIL_TO_SAVE).Throw("Data not successfully saved")
 	}
 	return user, nil
 }
@@ -92,10 +92,10 @@ func (u User) Delete(id string) *exception.ErrorException {
 	sess.Table(tableUsers)
 	isSuccess, err := sess.ID(id).Delete(&user)
 	if err != nil {
-		return exception.Exception(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
+		return exception.NewException(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
 	}
 	if isSuccess == 0 {
-		return exception.Exception(exception.RECORD_NOT_FOUND).Throw("Data not successfully deleted")
+		return exception.NewException(exception.RECORD_NOT_FOUND).Throw("Data not successfully deleted")
 	}
 	return nil
 }
@@ -106,7 +106,7 @@ func (u User) Update(id string, user *UsersEntity) *exception.ErrorException {
 	sess.ID(id)
 	_, err := sess.Update(user)
 	if err != nil {
-		return exception.Exception(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
+		return exception.NewException(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
 	}
 	return nil
 }
@@ -126,7 +126,7 @@ func (u User) Paging(property *paging.Pagination) (*paging.Pagination, *exceptio
 
 	err := sess.Find(&users)
 	if err != nil {
-		return nil, exception.Exception(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
+		return nil, exception.NewException(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
 	}
 	/**
 	setup the property of paging
@@ -136,7 +136,7 @@ func (u User) Paging(property *paging.Pagination) (*paging.Pagination, *exceptio
 	property.PageCount = paging.GetPage().GetRowCount(property)
 
 	if err != nil {
-		return nil, exception.Exception(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
+		return nil, exception.NewException(exception.ERROR_DATABASE_ERROR).Throw(err.Error())
 	}
 	return property, nil
 }
