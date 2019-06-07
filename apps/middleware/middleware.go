@@ -1,5 +1,9 @@
 package middleware
 
+/**
+this go file aim for grouping middleware handler for easy maintain
+you can add middleware handler on this file and injecting to the routes
+*/
 import (
 	"bitbucket.com/LippoDigitalOVO/ovo-auth/lib/uuid"
 	"bytes"
@@ -11,6 +15,11 @@ import (
 	"time"
 )
 
+/**
+this is global filter will log the request and also the response
+the log is already with the struct if you want to pass to the other thirdpary like new relic or datadog
+you can create handler for send the log to them
+*/
 func GlobalHandler(c *gin.Context) {
 	c.Writer.Header().Set("Content-Type", "application/json")
 	c.Request.Header.Add("request-id", uuid.GenerateUUID())
@@ -44,6 +53,9 @@ func GlobalHandler(c *gin.Context) {
 	}()
 }
 
+/**
+this is for cors handler if the request consuming from web
+*/
 func CorsHandler(router *gin.Engine) gin.HandlerFunc {
 	return cors.New(cors.Config{
 		AllowMethods:    []string{"GET", "POST", "OPTIONS"},
@@ -51,3 +63,14 @@ func CorsHandler(router *gin.Engine) gin.HandlerFunc {
 		AllowAllOrigins: true,
 	})
 }
+
+//func HandleErrors(c *gin.Context) {
+//	c.Next() // execute all the handlers
+//
+//	// at this point, all the handlers finished. Let's read the errors!
+//	if len(c.Errors) == 0 {
+//		return
+//	}
+//fmt.Println("error")
+//	c.AbortWithStatusJSON(http.StatusBadRequest, c.Errors)
+//}

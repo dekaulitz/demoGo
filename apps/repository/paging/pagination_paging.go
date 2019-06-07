@@ -106,6 +106,7 @@ func (p Paging) SetQueryBuilder(paging *Pagination, counter *xorm.Session,
 	return paging, counter, queryStatement
 }
 
+//get row counter
 func (p Paging) GetRowCount(pagination *Pagination) int64 {
 	return int64(math.Ceil(float64(pagination.RowCount) / float64(pagination.Size)))
 }

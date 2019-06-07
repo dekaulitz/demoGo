@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// you can add new router with your own style
 func SetRouterv1(r *gin.Engine) {
 	users := r.Group("/api/v1/users")
 	{

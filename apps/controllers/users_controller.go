@@ -14,7 +14,7 @@ func Users(c *gin.Context) {
 		handler.ResponseError(nil, c, err)
 		return
 	}
-	handler.ResponseOk(users, c, handler.Success(handler.RESPONSE_CREATED_SUCCESS).Ress())
+	handler.ResponseOk(users, c, handler.NewSuccess(handler.RESPONSE_CREATED_SUCCESS).Ress())
 	return
 }
 
@@ -24,7 +24,7 @@ func UserIndex(c *gin.Context) {
 		handler.ResponseError(nil, c, err)
 		return
 	}
-	handler.ResponseOk(users, c, handler.Success(handler.RESPONSE_SUCCESS).Ress())
+	handler.ResponseOk(users, c, handler.NewSuccess(handler.RESPONSE_SUCCESS).Ress())
 	return
 }
 
@@ -41,7 +41,7 @@ func UserInsert(c *gin.Context) {
 		handler.ResponseError(nil, c, err)
 		return
 	}
-	handler.ResponseOk(user, c, handler.Success(handler.RESPONSE_CREATED_SUCCESS).Ress())
+	handler.ResponseOk(user, c, handler.NewSuccess(handler.RESPONSE_CREATED_SUCCESS).Ress())
 	return
 }
 
@@ -51,7 +51,7 @@ func UserShow(c *gin.Context) {
 		handler.ResponseError(nil, c, err)
 		return
 	}
-	handler.ResponseOk(user, c, handler.Success(handler.RESPONSE_SUCCESS).Ress())
+	handler.ResponseOk(user, c, handler.NewSuccess(handler.RESPONSE_SUCCESS).Ress())
 	return
 }
 
@@ -61,7 +61,7 @@ func UserDelete(c *gin.Context) {
 		handler.ResponseError(nil, c, err)
 		return
 	}
-	handler.ResponseOk(nil, c, handler.Success(handler.RESPONSE_SUCCESS).Ress())
+	handler.ResponseOk(nil, c, handler.NewSuccess(handler.RESPONSE_SUCCESS).Ress())
 	return
 }
 
@@ -78,7 +78,7 @@ func UserUpdate(c *gin.Context) {
 		handler.ResponseError(nil, c, err)
 		return
 	}
-	handler.ResponseOk(nil, c, handler.Success(handler.RESPONSE_SUCCESS_UPDATED).Ress())
+	handler.ResponseOk(nil, c, handler.NewSuccess(handler.RESPONSE_SUCCESS_UPDATED).Ress())
 	return
 }
 
@@ -94,6 +94,6 @@ func UserPagination(c *gin.Context) {
 		handler.ResponseError(nil, c, err)
 		return
 	}
-	handler.ResponseOk(page, c, handler.Success(handler.RESPONSE_SUCCESS_UPDATED).Ress())
+	handler.ResponseOk(page, c, handler.NewSuccess(handler.RESPONSE_SUCCESS_UPDATED).Ress())
 	return
 }

@@ -40,17 +40,28 @@ func init() {
 	engine.SetMaxOpenConns(maxCon)
 	engine.SetMaxIdleConns(maxIdleCon)
 	engine.SetConnMaxLifetime(-1)
+
+	//this will be sync the struct into the table and the table will be same with struct
 	engine.Sync()
 }
 
+/**
+get connection database with
+*/
 func GetConnection() *xorm.Session {
 	return engine.NewSession()
 }
 
+/**
+get engine
+*/
 func GetEngine() *xorm.Engine {
 	return engine
 }
 
+/**
+create session
+*/
 func GetSession() *xorm.Session {
 	sess := GetConnection()
 	defer sess.Close()

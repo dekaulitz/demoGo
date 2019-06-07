@@ -5,6 +5,9 @@ import (
 	"strings"
 )
 
+/**
+const that defined with key on  configuration json/messages.json
+*/
 const (
 	ERROR_DATABASE_ERROR  = "DATABASE_ERROR"
 	VALIDATION_FAIL       = "VALIDATION_FAIL"
@@ -27,11 +30,18 @@ var (
 	exceptionMessage string
 )
 
+/**
+creating new exception object and return it interface
+*/
 func NewException(errMessage string) *ErrorException {
 	exceptionMessage = errMessage
 	return &ErrorException{}
 }
 
+/**
+throwing message that defined with the const that exist on key json/messages.json
+and add some additional information from go
+*/
 func (ErrorException) Throw(message string) *ErrorException {
 	exception := &ErrorException{}
 	err := configuration.GetMessage(exceptionMessage)

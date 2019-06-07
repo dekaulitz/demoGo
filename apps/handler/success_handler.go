@@ -4,6 +4,9 @@ import (
 	"demoGo/configuration"
 )
 
+/**
+const that defined with key on  configuration json/messages.json
+*/
 const (
 	RESPONSE_CREATED_SUCCESS = "RESPONSE_CREATED_SUCCESS"
 	RESPONSE_SUCCESS_UPDATED = "RESPONSE_SUCCESS_UPDATED"
@@ -22,11 +25,18 @@ var (
 	message string
 )
 
-func Success(successMessage string) *ResponseInfo {
+/**
+creating new success object and return it interface
+*/
+func NewSuccess(successMessage string) *ResponseInfo {
 	message = successMessage
 	return &ResponseInfo{}
 }
 
+/**
+throwing message that defined with the const that exist on key json/messages.json
+and add some additional information from go
+*/
 func (ResponseInfo) Ress() *ResponseInfo {
 	info := &ResponseInfo{}
 	success := configuration.GetMessage(message)

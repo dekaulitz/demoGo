@@ -28,13 +28,6 @@ import (
 //	libraries.LoggingRequest(logger)
 //}
 
-func getRawUrl(url string, params gin.Params) string {
-	for _, element := range params {
-		url = strings.Replace(url, element.Value, ":"+element.Key, -1)
-	}
-	return url
-}
-
 type BodyLogWriter struct {
 	gin.ResponseWriter
 	Body *bytes.Buffer

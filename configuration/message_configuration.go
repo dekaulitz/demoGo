@@ -1,5 +1,9 @@
 package configuration
 
+/**
+this go file will be load the file response_message.json into [] object
+this aim for easy response handling messages either error nor success response
+*/
 import (
 	"encoding/json"
 	"log"
@@ -19,7 +23,9 @@ type MessageModel struct {
 	Message         string
 }
 
-//load message configration
+/**
+load message configuration and binding into [] MessageModel struct
+*/
 func LoadMessage() {
 	var _, filename, _, _ = runtime.Caller(0)
 	configurationFilePath := path.Join(path.Dir(filename), "./json/response_message.json")
@@ -41,7 +47,7 @@ func LoadMessage() {
 	}
 }
 
-//get messageMap with key and return MessageModel struct
+//get message base on map with key and return message struct
 func GetMessage(errMessage string) MessageModel {
 	var message MessageModel
 	message = MapMessage[errMessage]

@@ -7,6 +7,7 @@ import (
 )
 
 var (
+	//load configuration
 	config = configuration.GetConfiguration()
 )
 

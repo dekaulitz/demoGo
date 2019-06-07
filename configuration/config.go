@@ -18,8 +18,10 @@ var (
 )
 
 func init() {
+	//binding environment variable
 	goEnvironment, _ := os.LookupEnv("GODEMOENV")
 	if goEnvironment == "" {
+		//if your using other path you can change it
 		goEnvironment = "test"
 		os.Setenv("CONF_PATH", "$GOPATH/src/demoGo")
 
@@ -29,7 +31,7 @@ func init() {
 	if err != nil {
 		log.Panic("ErrorMapper loading .env file", err)
 	}
-
+	//injecting configration database
 	ConfigurationData.Database = MySQL{os.Getenv("HOSTNAME"), os.Getenv("USERNAME"),
 		os.Getenv("PASSWORD"), os.Getenv("MAX_OPEN_CONNECTIONS"),
 		os.Getenv("MAX_IDLE_CONNECTIONS"), os.Getenv("SCHEMA")}
@@ -43,6 +45,8 @@ func init() {
 	//	Compress:   true, // disabled by default
 	//})
 	//govalidator.SetFieldsRequiredByDefault(true)
+
+	//load messaging
 	LoadMessage()
 }
 

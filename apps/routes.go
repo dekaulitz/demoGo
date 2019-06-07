@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+//router group endpoint with middleware
 func Routers(r *gin.Engine) {
 	r.Use(middleware.CorsHandler(r))
 	r.Use(func(context *gin.Context) {
