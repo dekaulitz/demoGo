@@ -8,26 +8,6 @@ import (
 	"unicode"
 )
 
-//func SetLogResponse(c *gin.Context, body []byte, httpCode int) {
-//	var logger libraries.LogResponseModel
-//	logger.Header = c.Request.Header
-//	logger.RequestId = c.Request.Header.Get("request-id")
-//	logger.UriPath = getRawUrl(c.Request.URL.Path, c.Params)
-//	logger.Payload = body
-//	logger.HttpCode = httpCode
-//	libraries.LoggingResponse(logger)
-//
-//}
-//
-//func SetLogRequest(c *gin.Context, body []byte) {
-//	var logger libraries.LogRequest
-//	logger.Header = c.Request.Header
-//	logger.RequestId = c.Request.Header.Get("request-id")
-//	logger.UriPath = getRawUrl(c.Request.URL.Path, c.Params)
-//	logger.Payload = body
-//	libraries.LoggingRequest(logger)
-//}
-
 type BodyLogWriter struct {
 	gin.ResponseWriter
 	Body *bytes.Buffer
