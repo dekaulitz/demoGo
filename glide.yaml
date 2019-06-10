@@ -5,7 +5,7 @@ import:
   - package: github.com/kardianos/govendor
     version: ^1.0.9
   - package: github.com/gin-gonic/gin
-    version: ^1.3.0
+    version: ^1.4.0
   - package: github.com/gin-contrib/cors
     version: ^1.2.0
   - package: github.com/stretchr/testify
@@ -16,5 +16,6 @@ import:
   - package: github.com/go-sql-driver/mysql
   - package: github.com/asaskevich/govalidator
   - package: github.com/SermoDigital/jose
+  - package: github.com/google/uuid
     subpackages:
       - assert

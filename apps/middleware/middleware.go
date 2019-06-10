@@ -5,11 +5,11 @@ this go file aim for grouping middleware handler for easy maintain
 you can add middleware handler on this file and injecting to the routes
 */
 import (
-	"bitbucket.com/LippoDigitalOVO/ovo-auth/lib/uuid"
 	"bytes"
 	"demoGo/apps/handler"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"io/ioutil"
 	"log"
 	"time"
@@ -22,12 +22,12 @@ you can create handler for send the log to them
 */
 func GlobalHandler(c *gin.Context) {
 	c.Writer.Header().Set("Content-Type", "application/json")
-	c.Request.Header.Add("request-id", uuid.GenerateUUID())
+	c.Request.Header.Add("request-id", uuid.New().String())
 	blw := &handler.BodyLogWriter{Body: bytes.NewBufferString(""), ResponseWriter: c.Writer}
 	c.Writer = blw
 	var logBody handler.LogRequest
 	t := time.Now()
-	logBody.RequestId = uuid.GenerateUUID()
+	logBody.RequestId = c.Request.Header.Get("request-id")
 	logBody.Url = c.Request.RequestURI
 	var requestBodyBytes []byte
 	if c.Request.Body != nil {
